@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <div>
+
+                <div>
+                    <h:form>
+
+                        <p:dataTable var="linija" value="#{korisnikTabela.tabela}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"
+                                     rendered="#{korisnikTabela.tabela.size()>0}">
+
+                            <p:column headerText="Prevoznik">
+                                <h:outputText value="#{linija.prevoznik}" />
+                            </p:column>
+
+                            <p:column headerText="Datum polaska(godina-mesec-dan)">
+                                <h:outputText value="#{linija.datum}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Vreme polaska">
+                                <h:outputText value="#{linija.vremePolaska}">
+                                    <f:convertDateTime pattern="HH:mm"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Medjustanice">
+                                <h:outputText value="#{linija.medjustanice}"/>
+                            </p:column>
+
+                            <p:column headerText="Detalji">
+                                <h:commandLink value="vidi detalje o liniji" action="#{korisnikTabela.detalji()}">
+                                    <f:setPropertyActionListener target="#{korisnikTabela.odabranaLinija}" value="#{linija.mid}"/>
+                                </h:commandLink>
+                            </p:column>
+
+                            <p:column headerText="Rezervacija">
+                                <h:commandLink value="rezervisi kartu" action="#{korisnikTabela.rezervisi()}">
+                                    <f:setPropertyActionListener target="#{korisnikTabela.odabranaLinija}" value="#{linija.mid}"/>
+                                </h:commandLink>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+
+
+                    <h2>Pretraga linija</h2>
+
+                    <p:messages for="pretragaForma" style="color:red" />
+
+                    <h:form id="pretragaForma">
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="inline" value="Datum:" />
+                            <p:calendar id="inline" value="#{korisnikTabela.gtabela.datum}" mode="inline"/>
+
+                            <p:outputLabel for="polaziste" value="Polaziste:" />
+                            <p:selectOneMenu id="polaziste" value="#{korisnikTabela.gtabela.polaziste}">
+                                <f:selectItem itemLabel="" itemValue="" />
+                                <f:selectItems value="#{korisnikTabela.gtabela.stanice}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="odrediste" value="Odrediste:" />
+                            <p:selectOneMenu id="odrediste" value="#{korisnikTabela.gtabela.odrediste}">
+                                <f:selectItem itemLabel="" itemValue="" />
+                                <f:selectItems value="#{korisnikTabela.gtabela.stanice}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="prevoznik" value="Prevoznik (nije obavezno) :" />
+                            <p:selectOneMenu id="prevoznik" value="#{korisnikTabela.gtabela.prevoznik}">
+                                <f:selectItem itemLabel="" itemValue="" />
+                                <f:selectItems value="#{korisnikTabela.gtabela.prevoznici}" />
+                            </p:selectOneMenu>
+
+
+                            <p:outputLabel for="polaziNakon" value="Polazi nakon (nije obavezno) :" />
+                            <p:calendar id="polaziNakon" value="#{korisnikTabela.gtabela.polaziNakon}" pattern="HH:mm" timeOnly="true"  />
+
+                            <p:outputLabel for="polaziPre" value="Polazi pre (nije obavezno) :" />
+                            <p:calendar id="polaziPre" value="#{korisnikTabela.gtabela.polaziPre}" pattern="HH:mm" timeOnly="true"  />           
+                        </h:panelGrid>
+
+                        <br/>
+
+                        <h:commandButton value="Trazi" action="#{korisnikTabela.pretraga()}"/>
+
+                    </h:form>
+
+                </div>
+
+                <div >
+                    
+                    <br/>
+                    <br/>
+                    
+                    <h2>Dodatne mogucnosti</h2>
+                    
+                    <h:form>
+
+
+
+                        <br/>
+                        <br/>
+
+                        <h:commandLink value="Vidi rezervacije" action="rezervacije"/>
+
+
+                        <br/>
+                        <br/>
+
+                        <h:commandLink value="Kupi kartice" action="kartice"/>
+
+                        <br/>
+                        <br/>
+
+                        <h:commandLink value="Vidite vasu mesecnu/godisnju karticu" action="#{korisnikTabela.vidiKartice()}"/>
+
+                        <br/>
+                        <br/>
+
+
+                        <h3>
+                            <h:commandLink value="Gradske linije" action="glinije">
+                                <f:setPropertyActionListener target="#{glinija.tabela}" value="#{glinija.sveLinije()}"/>
+                            </h:commandLink>
+                        </h3>
+
+                    </h:form>
+
+                </div>
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+

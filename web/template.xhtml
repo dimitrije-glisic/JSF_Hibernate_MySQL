@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <title>Facelets Template</title>        
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+
+                <h:form>
+                    <div align="right">  <h:commandButton value="Logout" action="#{loginController.logout()}" 
+                                     rendered="#{loginController.korisnik != null}"
+                                     style=""/>
+                    </div>              
+                </h:form>         
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="body">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">
+                
+                <p align="center">Copyright(C) 2018 by Dimitrije Glišić</p>
+                
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

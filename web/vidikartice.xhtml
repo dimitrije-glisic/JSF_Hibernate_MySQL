@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            
+
+            <h:form>
+
+                <b>
+                    <h:outputText value="Nemate ni mesecnu ni godisnju karticu" 
+                                  rendered="#{korisnikTabela.mesecna == null and korisnikTabela.godisnja==null}"/>
+                </b>
+
+                <b>
+                    <h:outputText value="Nemate mesecnu karticu"
+                                  rendered="#{korisnikTabela.mesecna == null and korisnikTabela.godisnja != null}"/>
+                </b>
+
+
+
+
+                <h:panelGroup rendered="#{korisnikTabela.mesecna != null}">
+
+                    <h3>Mesecna kartica</h3>
+
+                    <h:form>
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel for="vaziod" value="Vazi od:"/>
+                            <h:outputText id="vaziod" value="#{korisnikTabela.mesecna.vaziOd}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+
+                            <h:outputLabel for="vazido" value="Vazi do:"/>
+                            <h:outputText id="vazido" value="#{korisnikTabela.mesecna.vaziDo}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+
+                            <h:outputText value="Cena: #{korisnikTabela.mesecna.cena}">
+                                <f:convertNumber minFractionDigits="2"/>
+                            </h:outputText>
+
+                        </h:panelGrid>
+                        <h:outputText value="Kartica jos uvek nije vazeca - zahtev se obradjuje"
+                                      style="color:orange"
+                                      rendered="#{korisnikTabela.mesecna.stanje == 0}"/>
+
+
+
+                    </h:form>
+
+                </h:panelGroup>
+                
+                <br/>
+                
+                <p:separator/>
+                
+                <br/>
+                
+
+                <b>
+                    <h:outputText value="Nemate godisnju karticu"
+                                  rendered="#{korisnikTabela.godisnja== null and korisnikTabela.mesecna!= null}"/>
+                </b>
+
+                <h:panelGroup rendered="#{korisnikTabela.godisnja != null}">
+
+                    <h3>Godisnja kartica</h3>
+
+                    <h:form>
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel for="vaziod" value="Vazi od:"/>
+                            <h:outputText id="vaziod" value="#{korisnikTabela.godisnja.vaziOd}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+
+                            <h:outputLabel for="vazido" value="Vazi do:"/>
+                            <h:outputText id="vazido" value="#{korisnikTabela.godisnja.vaziDo}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+
+                            <h:outputText value="Cena: #{korisnikTabela.godisnja.cena}">
+                                <f:convertNumber minFractionDigits="2"/>
+                            </h:outputText>
+
+                            <h:outputText value="Kartica jos uvek nije vazeca - zahtev se obradjuje"
+                                          style="color:orange"
+                                          rendered="#{korisnikTabela.godisnja.stanje == 0}"/>
+
+                        </h:panelGrid>
+
+
+
+                    </h:form>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+</html>
+

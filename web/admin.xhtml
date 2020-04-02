@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="top">
+
+            <h:form>
+
+                <p:menubar style="padding:10px ; ">
+
+                    <p:menuitem value="Gradske linije" action="admin_gradske" style="margin-right: 20px ; color:steelblue"/>
+
+                    <p:menuitem value="Medjugradske linije" action="admin_medjugradske" style="margin-right: 20px ; color:steelblue"/>
+
+                    <p:menuitem value="Zahtevi" action="admin_zahtevi" style="color:steelblue"/>
+
+                    <p:menuitem value="Logout" action="#{loginController.logout()}" style="margin-left: 930px ; color:steelblue"/>
+
+                </p:menubar>
+
+
+
+            </h:form>
+
+        </ui:define>
+
+
+        <ui:define name="body">
+
+            <h2>Admin pocetna</h2>
+
+
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+</html>
+

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+
+
+        <ui:define name="top">
+            <h:form>
+                <h:commandButton value="Login" action="index" />
+            </h:form>
+        </ui:define>
+
+
+
+
+
+        <ui:define name="body">
+
+
+            <h2>Registracija</h2>
+
+
+            <p:messages for="registerform" style="color:red"/>
+            <h:form id="registerform">
+
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="ime" value="Ime:"/>
+                    <p:inputText id="ime" value="#{registerController.ime}"/>
+                    <p:message for="ime" style="color:red" />
+
+                    <p:outputLabel for="prezime" value="Prezime:"/>
+                    <p:inputText id="prezime" value="#{registerController.prezime}"/>
+                    <p:message for="prezime" style="color:red" />
+
+                    <p:outputLabel for="username" value="Korisnicko ime:"/>
+                    <p:inputText id="username" value="#{registerController.korisnickoIme}"/>
+                    <p:message for="username" style="color:red" />
+
+                    <p:outputLabel for="password" value="Sifra:"/>
+                    <p:password id="password" value="#{registerController.sifra}"/>
+                    <p:message for="password" style="color:red" />
+
+                    <p:outputLabel for="pconf" value="Potrvdi sifru:"/>
+                    <p:password id="pconf" value="#{registerController.sifraPotvrda}" validator="#{registerController.validateSifra}"/>                                      
+                    <p:message for="pconf" style="color:red" />
+
+                    <p:outputLabel for="grad" value="Grad:"/>
+                    <p:inputText id="grad" value="#{registerController.grad}"/>
+                    <p:message for="grad" style="color:red" />
+
+                    <p:outputLabel for="opstina" value="Opstina:"/>
+                    <p:inputText id="opstina" value="#{registerController.opstina}"/>
+                    <p:message for="opstina" style="color:red" />
+
+                    <p:outputLabel for="ulica" value="Ulica:"/>
+                    <p:inputText id="ulica" value="#{registerController.ulica}"/>
+                    <p:message for="ulica" style="color:red" />
+
+                    <p:outputLabel for="broj" value="Broj ulice:"/>
+                    <p:inputText id="broj" value="#{registerController.broj}"/>
+                    <p:message for="broj" style="color:red" />
+
+                    <p:outputLabel for="datum" value="Datum rodjenja(gggg-mm-dd):"/>                  
+                    <p:inputText id="datum" value="#{registerController.datumRodjenja}"/>                                           
+                    <p:message for="datum" style="color:red" />
+
+                    <p:outputLabel for="telefon" value="Telefon:"/>
+                    <p:inputText id="telefon" value="#{registerController.telefon}"/>
+                    <p:message for="telefon" style="color:red" />
+
+                    <p:outputLabel for="kategorija" value="Kategorija:"/>
+                    <p:selectOneRadio id="kategorija" layout="grid" columns="3" value="#{registerController.kategorija}">
+                        <f:selectItem itemLabel="Nezaposlen" itemValue="n"/>
+                        <f:selectItem itemLabel="Zaposlen" itemValue="z"/>
+                        <f:selectItem itemLabel="Student" itemValue="s"/>
+                        <f:selectItem itemLabel="Lice sa invaliditetom" itemValue="l"/>
+                        <f:selectItem itemLabel="Penzioner" itemValue="p"/>
+                    </p:selectOneRadio>
+                    <p:message for="kategorija" style="color:red"/>
+
+                    <p:outputLabel for="email" value="Email:"/>
+                    <p:inputText id="email" value="#{registerController.email}"/>                                            
+                    <p:message for="email" style="color:red" />
+
+                    <p:outputLabel for="captcha" value="Unesite broj koji vidite: #{registerController.trenutnaCaptcha}"/>
+                    <p:inputText id="captcha" value="#{registerController.captcha}"/>
+                    <p:message for="email" style="color:red"/>
+
+
+                </h:panelGrid>
+
+
+
+                <h:commandButton value="Registracija" action="#{registerController.registracija()}" />
+                <br/> <br/>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>
+

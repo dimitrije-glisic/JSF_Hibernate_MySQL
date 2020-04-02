@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <h2>Unesite potrebne podatke o autobusu</h2>
+            
+            <p:message for="dodavanje_autobus"/>
+            <h:form enctype="multipart/form-data" id="dodavanje_autobus">
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="marka" value="Marka:"/>
+                    <p:inputText id="marka" value="#{dodavanjeAutobus.autobus.marka}"
+                                 required="true"
+                                 requiredMessage="Unesite marku autobusa"/>                  
+                    <p:message for="marka" style="color:red"/>
+
+                    <h:outputLabel for="model" value="Model:"/>
+                    <p:inputText id="model" value="#{dodavanjeAutobus.autobus.model}"
+                                 required="true"
+                                 requiredMessage="Unesite model autobusa"/>
+                    <p:message for="model" style="color:red"/>
+
+                    <h:outputLabel for="brsed" value="Broj sedista:"/>
+                    <p:inputText id="brsed" value="#{dodavanjeAutobus.autobus.brojSedista}"
+                                 required="true"
+                                 requiredMessage="Unesite broj sedista"/>
+                    <p:message for="brsed" style="color:red"/>
+                </h:panelGrid>
+
+                <br/>
+
+
+
+
+                <h:panelGroup id="msg">
+                    <strong>
+                        <h:outputText value="Uneli ste 5 fotografija: eventualno dalje dodavanje nece imati efekta!"
+                                      rendered="#{dodavanjeAutobus.slike.size()==5}"/>
+                    </strong>
+                </h:panelGroup>
+
+
+                <p:fileUpload id="upload" fileUploadListener="#{dodavanjeAutobus.upload}" auto="true" update="msg"/>                    
+
+
+
+                <h:commandButton value="Dodaj autobus" action="#{dodavanjeAutobus.dodajAutobus()}"/>
+
+
+
+
+                <br/>
+
+
+
+
+
+            </h:form>
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+
+
+
+</html>
+

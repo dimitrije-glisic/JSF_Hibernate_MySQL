@@ -1,0 +1,24 @@
+
+
+<p:commandButton id="qr_update" update="qr_code"/>
+
+
+<p:graphicImage  id="qr_code" alt="gde je slika" value="/resources/images/qr.png"
+                                     cache="false"                                
+                                     width="250" height="250"
+                                     style="display: block;
+                                     margin-left: auto;
+                                     margin-right: auto;"                                
+                                     />
+                 
+
+
+
+
+<img src="resources/images/qr.png" 
+                         width="250" height="250"
+                         style="margin-left: auto;
+                         margin-right: auto"
+                         />
+
+					

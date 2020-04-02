@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+
+
+        <ui:define name="body">
+
+            <h:form>
+                <h:commandLink value="Nazad" action="korisnik"/>
+            </h:form>
+
+            <h2>Detalji o liniji #{korisnikTabela.odabranaLinija}</h2>
+
+            <br/> <br/>
+
+            <h3>Autobus</h3>
+            <h:panelGrid columns="2">
+                <h:outputText value="Marka:"/>
+                <h:outputText value="#{korisnikTabela.autobus.marka}"/>
+
+                <h:outputText value="Model:"/>
+                <h:outputText value="#{korisnikTabela.autobus.model}"/>
+
+                <h:outputText value="Broj sedista:"/>
+                <h:outputText value="#{korisnikTabela.autobus.brojSedista}"/>
+            </h:panelGrid>
+
+            <br/>
+            
+            <h4>Galerija:</h4>
+            
+            <p:galleria value="#{korisnikTabela.galerija}" var="slika" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{korisnikTabela.galerija.size()>0}">
+                <p:graphicImage library="images" name="#{slika.naziv}" alt="Image Description for #{slika.naziv}" title="#{slika.naziv}"/>
+            </p:galleria>
+
+            <strong>
+                <h:outputText value="Nema fotografija za ovaj autobus" rendered="#{korisnikTabela.galerija.size()==0}"/>
+            </strong>         
+            
+            <br/>
+
+            <p:separator/>
+
+            <br/>
+
+            <h3>Vozac</h3>
+            <h:panelGrid columns="2">
+                <h:outputText value="Ime:"/>
+                <h:outputText value="#{korisnikTabela.vozac.ime}"/>
+
+                <h:outputText value="Prezime:"/>
+                <h:outputText value="#{korisnikTabela.vozac.prezime}"/>
+
+                <h:outputText value="Zaposlen od:"/>
+                <h:outputText value="#{korisnikTabela.vozac.datumZaposlenja}">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:outputText>
+            </h:panelGrid>
+
+            <br/>
+
+            <p:separator/>
+
+            <br/>
+
+            <h3>Mapa</h3>
+
+
+            <p:gmap  center="44.776, 20.5012" zoom="9" type="HYBRID" style="width:100%;height:600px" 
+                     model="#{korisnikTabela.mapa}"  widgetVar="map" />
+
+
+            <br/>
+
+            <h:form>
+                <h:commandLink value="Nazad" action="korisnik"/>
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>
+

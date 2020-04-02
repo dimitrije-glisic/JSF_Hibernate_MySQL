@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <h2>Vase rezervacije</h2>
+            
+            
+            <p:messages for="rezervacije"/>
+                
+            <h:outputText value="Nemate rezervacija" rendered="#{korisnikTabela.dohvatiRezervacije().size()==0}" />
+            
+            <h:form id="rezervacije" rendered="#{korisnikTabela.dohvatiRezervacije().size()>0}">
+
+                <p:dataTable var="r" value="#{korisnikTabela.dohvatiRezervacije()}">
+
+                    <p:column headerText="Broj linije">
+                        <h:outputText value="#{r.linija.mlinijaId}"  style="color:yellow" rendered="#{r.rezervacija.stanje == 0}"/>
+                        <h:outputText value="#{r.linija.mlinijaId}"  style="color:green" rendered="#{r.rezervacija.stanje == 1}"/>
+                        <h:outputText value="#{r.linija.mlinijaId}"  style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje == 3}"/>
+                    </p:column>
+
+                    <p:column headerText="Polaziste">
+                        <h:outputText value="#{r.linija.polaziste}" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}" />
+                        <h:outputText value="#{r.linija.polaziste}" style="color:green" rendered="#{r.rezervacija.stanje == 1}" />
+                        <h:outputText value="#{r.linija.polaziste}" style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje == 3}" />
+                    </p:column>
+
+                    <p:column headerText="Odrediste">
+                        <h:outputText value="#{r.linija.odrediste}" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}" />
+                        <h:outputText value="#{r.linija.odrediste}" style="color:green" rendered="#{r.rezervacija.stanje == 1}" />
+                        <h:outputText value="#{r.linija.odrediste}" style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje == 3}" />
+                    </p:column>
+
+                    <p:column headerText="Datum">
+                        <h:outputText value="#{r.linija.datum}" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}" />
+                        <h:outputText value="#{r.linija.datum}" style="color:green" rendered="#{r.rezervacija.stanje == 1}" />
+                        <h:outputText value="#{r.linija.datum}" style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje == 3}" />
+                    </p:column>
+
+
+                    <p:column headerText="Vreme polaska">
+                        <h:outputText value="#{r.linija.vremePolaska}" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>
+
+                        <h:outputText value="#{r.linija.vremePolaska}" style="color:green" rendered="#{r.rezervacija.stanje == 1}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>
+
+                        <h:outputText value="#{r.linija.vremePolaska}" style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje==3}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>
+
+                    </p:column>
+
+
+                    <p:column headerText="Vreme dolaska">
+                        <h:outputText value="#{r.linija.vremeDolaska}" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>
+
+                        <h:outputText value="#{r.linija.vremeDolaska}" style="color:green" rendered="#{r.rezervacija.stanje == 1}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>
+
+                        <h:outputText value="#{r.linija.vremeDolaska}" style="color:red" rendered="#{r.rezervacija.stanje == 2 or r.rezervacija.stanje==3}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </h:outputText>    
+                    </p:column>
+
+                    <p:column headerText="Status rezervacije">
+                        <h:outputText value="Obradjuje se" style="color:yellow" rendered="#{r.rezervacija.stanje == 0}" />
+                        <h:outputText value="Odobren" style="color:green" rendered="#{r.rezervacija.stanje == 1}"/>
+                        <h:outputText value="Odbijen: ne mozete rezervisati vise od 3 karte" style="color:red"
+                                      rendered="#{r.rezervacija.stanje==2}"/>
+                        <h:outputText value="Odbijen: popunjena su mesta u autobusu" style="color:red"
+                                      rendered="#{r.rezervacija.stanje==3}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:commandLink value="ukloni" action="#{korisnikTabela.ukloniRezervaciju(r.rezervacija)}"
+                                       rendered="#{r.rezervacija.stanje==2 or r.rezervacija.stanje==3 or r.rezervacija.stanje==0}"/>
+                        <h:commandLink value="otkazi" action="#{korisnikTabela.otkaziRezervaciju(r)}"
+                                       rendered="#{r.rezervacija.stanje==1}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
+                <br/>
+
+                
+                <h:commandLink value="Nazad" action="korisnik"/>
+
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+
+
+</html>
+

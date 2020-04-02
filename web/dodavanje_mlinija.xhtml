@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <h:form>
+
+                <p:wizard >
+                    <p:tab id="osnovneinfo" title="Osnovne informacije">
+                        <p:panel header="Prevoznik/Polaziste/Odrediste">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Prevoznik:" />
+                                <p:selectOneMenu id="prevoznik" value="#{dodavanjeMLinija.prevoznik}" required="true">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.gtabela.prevoznici}" />
+                                </p:selectOneMenu>
+
+                                <h:outputText value="Polaziste:" />
+                                <p:selectOneMenu id="polaziste" value="#{dodavanjeMLinija.polaziste}" required="true">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}" />
+                                </p:selectOneMenu>
+
+                                <h:outputText value="Odrediste: " />
+                                <p:selectOneMenu id="odrediste" value="#{dodavanjeMLinija.odrediste}" required="true">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}" />
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="datum_vreme" title="Datum/Vreme">
+                        <p:panel header="Datum i vreme polaska">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel for="datum" value="Datum: " />
+                                <p:calendar id="datum" value="#{dodavanjeMLinija.datum}" pattern="yyyy-MM-dd" required="true"/>
+
+                                <p:outputLabel for="vpolaska" value="Vreme polaska: " />
+                                <p:calendar id="vpolaska" value="#{dodavanjeMLinija.vremePolaska}" pattern="HH:mm" timeOnly="true"  required="true"/>
+
+                                <p:outputLabel for="vdolaska" value="Vreme dolaska: " />
+                                <p:calendar id="vdolaska" value="#{dodavanjeMLinija.vremeDolaska}" pattern="HH:mm" timeOnly="true"  required="true"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+
+                    <p:tab id="medjustanice" title="Medjustanice">
+                        <p:panel header="Medjustanice">
+                            <p:messages />
+                            <h:panelGrid columns="4" columnClasses="label, value">
+                                <h:outputText  value="Medjustanica 1:"/>
+                                <h:selectOneMenu id="ms1" value="#{dodavanjeMLinija.medjustanice_M[0]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v1" value="#{dodavanjeMLinija.vremenaDolazaka[0]}" pattern="HH:mm" timeOnly="true" />
+
+
+                                <h:outputText  value="Medjustanica 2:"/>
+                                <h:selectOneMenu id="ms2" value="#{dodavanjeMLinija.medjustanice_M[1]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v2" value="#{dodavanjeMLinija.vremenaDolazaka[1]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText  value="Medjustanica 3:"/>
+                                <h:selectOneMenu id="ms3" value="#{dodavanjeMLinija.medjustanice_M[2]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v3" value="#{dodavanjeMLinija.vremenaDolazaka[2]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText  value="Medjustanica 4:"/>
+                                <h:selectOneMenu id="ms4" value="#{dodavanjeMLinija.medjustanice_M[3]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v4" value="#{dodavanjeMLinija.vremenaDolazaka[3]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText   value="Medjustanica 5:"/>
+                                <h:selectOneMenu id="ms5" value="#{dodavanjeMLinija.medjustanice_M[4]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v5" value="#{dodavanjeMLinija.vremenaDolazaka[4]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText   value="Medjustanica 6:"/>
+                                <h:selectOneMenu id="ms6" value="#{dodavanjeMLinija.medjustanice_M[5]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v6" value="#{dodavanjeMLinija.vremenaDolazaka[5]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText  value="Medjustanica 7:"/>
+                                <h:selectOneMenu id="ms7" value="#{dodavanjeMLinija.medjustanice_M[6]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v7" value="#{dodavanjeMLinija.vremenaDolazaka[6]}" pattern="HH:mm" timeOnly="true" />
+
+
+                                <h:outputText  value="Medjustanica 8:"/>
+                                <h:selectOneMenu id="ms8" value="#{dodavanjeMLinija.medjustanice_M[7]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v8" value="#{dodavanjeMLinija.vremenaDolazaka[7]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText   value="Medjustanica 9:"/>
+                                <h:selectOneMenu id="ms9" value="#{dodavanjeMLinija.medjustanice_M[8]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v9" value="#{dodavanjeMLinija.vremenaDolazaka[8]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                                <h:outputText  value="Medjustanica 10:"/>
+                                <h:selectOneMenu id="ms10" value="#{dodavanjeMLinija.medjustanice_M[9]}">
+                                    <f:selectItem itemLabel="" itemValue="" />
+                                    <f:selectItems value="#{korisnikTabela.sveStanice()}"/>
+                                </h:selectOneMenu>
+                                <h:outputText value="Vreme dolaska: " />
+                                <p:calendar id="v10" value="#{dodavanjeMLinija.vremenaDolazaka[9]}" pattern="HH:mm" timeOnly="true"  />
+
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+
+
+                    <p:tab id="autobus_vozac" title="Autobus/Vozac">
+
+                        <p:messages />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="v" value="Vozac:"/>
+                            <h:outputText value="Trenutno nema slobonih vozaca" rendered="#{admin.slobodniVozaci().size() == 0}"/>
+                            <p:selectOneMenu id="v" value="#{dodavanjeMLinija.vozac_M}" rendered="#{admin.slobodniVozaci().size() > 0}">
+                                <f:selectItem itemLabel="" itemValue="" />
+                                <f:selectItems value="#{admin.slobodniVozaci()}"/>                             
+                            </p:selectOneMenu>
+
+                           
+                            <h:outputLabel for="a" value="Autobus:"/>
+                            <h:outputText value="Trenutno nema slobonih autobusa" rendered="#{admin.slobodniAutobusi().size() == 0}"/>
+                            <p:selectOneMenu id="a" value="#{dodavanjeMLinija.autobus_M}" rendered="#{admin.slobodniAutobusi().size() > 0}">
+                                <f:selectItem itemLabel="" itemValue="" />
+                                <f:selectItems value="#{admin.slobodniAutobusi()}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab id="potvrda" title="Potvrda">
+                        <p:panel header="Pregled nove linije">
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Prevoznik: " />
+                                <h:outputText value="#{dodavanjeMLinija.prevoznik}" styleClass="outputLabel"/>
+
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+                                <h:outputText value="Polaziste: " />
+                                <h:outputText value="#{dodavanjeMLinija.polaziste}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Odrediste: " />
+                                <h:outputText value="#{dodavanjeMLinija.odrediste}" styleClass="outputLabel"/>
+
+
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+                                <h:outputText value="Medjustanice:"/>
+                                <h:outputText/>                                
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+                                <h:outputText value="Medjustanica 1 "  rendered="#{dodavanjeMLinija.medjustanice_M[0] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[0]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[0] != null}"/>
+
+
+                                <h:outputText value="Medjustanica 2 "  rendered="#{dodavanjeMLinija.medjustanice_M[1] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[1]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[1] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 3 "  rendered="#{dodavanjeMLinija.medjustanice_M[2] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[2]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[2] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 4 "  rendered="#{dodavanjeMLinija.medjustanice_M[3] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[3]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[3] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 5 "  rendered="#{dodavanjeMLinija.medjustanice_M[4] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[4]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[4] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 6 "  rendered="#{dodavanjeMLinija.medjustanice_M[5] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[5]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[5] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 7 "  rendered="#{dodavanjeMLinija.medjustanice_M[6] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[6]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[6] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 8 "  rendered="#{dodavanjeMLinija.medjustanice_M[7] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[7]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[7] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 9 "  rendered="#{dodavanjeMLinija.medjustanice_M[8] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[8]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[8] != null}"/>
+
+
+
+                                <h:outputText value="Medjustanica 10 "  rendered="#{dodavanjeMLinija.medjustanice_M[9] != null}"/>
+                                <h:outputText value="#{dodavanjeMLinija.medjustanice_M[9]}" styleClass="outputLabel" rendered="#{dodavanjeMLinija.medjustanice_M[9] != null}"/>
+
+
+
+
+
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+
+
+
+
+
+                                <h:outputText value="Datum: " />
+                                <h:outputText value="#{dodavanjeMLinija.datum}" styleClass="outputLabel">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                </h:outputText>
+
+                                <h:outputText value="Vreme polaska: " />
+                                <h:outputText value="#{dodavanjeMLinija.vremePolaska}" styleClass="outputLabel">
+                                    <f:convertDateTime pattern="HH:mm"/>
+                                </h:outputText>
+
+                                <h:outputText value="Vreme dolaska: " />
+                                <h:outputText value="#{dodavanjeMLinija.vremeDolaska}" styleClass="outputLabel">
+                                    <f:convertDateTime pattern="HH:mm"/>
+                                </h:outputText>
+
+
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+
+
+
+
+
+                                <h:outputText value="Autobus:  " />
+                                <h:outputText value="#{dodavanjeMLinija.autobusString}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Vozac:  " />
+                                <h:outputText value="#{dodavanjeMLinija.vozacString}" styleClass="outputLabel"/>
+
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+                                <h:outputText/>
+
+
+
+                            </h:panelGrid>
+
+                            <h:commandButton value="Dodaj liniju" actionListener="#{dodavanjeMLinija.dodajMLiniju()}"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+</html>
+

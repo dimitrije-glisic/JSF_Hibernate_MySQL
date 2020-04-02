@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+
+            <h2>Dodavanje gradske linije</h2>
+
+            <br/>
+
+            <p:messages for="dodavanje_glinija"/>
+            <h:form id="dodavanje_glinije">
+
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="brlinije" value="Broj linije:"/>
+                    <p:inputText id="brlinije" value="#{dodavanjeGLinija.glinija.brojLinije}"/>
+
+                    <h:outputLabel for="polaziste" value="Polazno stajaliste:"/>
+                    <p:selectOneMenu id="polaziste" value="#{dodavanjeGLinija.glinija.polaznoStajaliste}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel for="odrediste" value="Krajnje stajaliste:"/>
+                    <p:selectOneMenu id="odrediste" value="#{dodavanjeGLinija.glinija.krajnjeStajaliste}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel for="medjustanice"  value="Medjustanice:"/>
+                    <h:outputText id="medjustanice" value=""/>
+
+                    <h:outputText   value=""/>
+                    <h:outputText   value=""/>
+
+                    <h:outputLabel for="ms1" value="Stajaliste 1:"/>
+                    <h:selectOneMenu id="ms1" value="#{dodavanjeGLinija.stajalista[0]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms2" value="Stajaliste 2:"/>
+                    <h:selectOneMenu id="ms2" value="#{dodavanjeGLinija.stajalista[1]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms3" value="Stajaliste 3:"/>
+                    <h:selectOneMenu id="ms3" value="#{dodavanjeGLinija.stajalista[2]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms4" value="Stajaliste 4:"/>
+                    <h:selectOneMenu id="ms4" value="#{dodavanjeGLinija.stajalista[3]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms5" value="Stajaliste 5:"/>
+                    <h:selectOneMenu id="ms5" value="#{dodavanjeGLinija.stajalista[4]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms6" value="Stajaliste 6:"/>
+                    <h:selectOneMenu id="ms6" value="#{dodavanjeGLinija.stajalista[5]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms7" value="Stajaliste 7:"/>
+                    <h:selectOneMenu id="ms7" value="#{dodavanjeGLinija.stajalista[6]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms8" value="Stajaliste 8:"/>
+                    <h:selectOneMenu id="ms8" value="#{dodavanjeGLinija.stajalista[7]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms9" value="Stajaliste 9:"/>
+                    <h:selectOneMenu id="ms9" value="#{dodavanjeGLinija.stajalista[8]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="ms10" value="Stajaliste 10:"/>
+                    <h:selectOneMenu id="ms10" value="#{dodavanjeGLinija.stajalista[9]}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputText   value=""/>
+                    <h:outputText   value=""/>
+                    <h:outputText   value=""/>
+                    <h:outputText   value=""/>
+
+                    <h:outputLabel for="vozaci" value="Vozaci:"/>
+                    <h:outputText value="Trenutno nema slobonih vozaca" rendered="#{admin.slobodniVozaci().size() == 0}"/>
+                    <p:selectManyMenu id="vozaci" value="#{dodavanjeGLinija.vozaci}" rendered="#{admin.slobodniVozaci().size() > 0}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{admin.slobodniVozaci()}"/>
+                    </p:selectManyMenu>
+
+                </h:panelGrid>
+
+                <p:separator/>
+
+                <h3>Red voznje</h3>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="ird" value="Interval radni dan:"/>
+                    <h:inputText id="ird" value="#{dodavanjeGLinija.redVoznje.intervalrd}"/>
+
+                    <h:outputLabel for="is" value="Interval subota:"/>
+                    <h:inputText id="is" value="#{dodavanjeGLinija.redVoznje.intervals}"/>
+
+                    <h:outputLabel for="in" value="Interval nedelja"/>
+                    <h:inputText id="in" value="#{dodavanjeGLinija.redVoznje.intervaln}"/>
+
+                    <h:outputLabel for="pvreme" value="Predvidjeno vreme voznje:"/>
+                    <h:inputText id="pvreme" value="#{dodavanjeGLinija.redVoznje.predvidjenoVremeVoznje}"/>
+
+                </h:panelGrid>
+
+                <br/>
+                <h:commandButton value="Dodaj liniju" action="#{dodavanjeGLinija.dodajGLiniju()}" />
+
+            </h:form>
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+</html>
+

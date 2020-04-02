@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml" >
+
+
+        <ui:define name="body">
+            
+            
+            
+            <h:form>
+
+                <h:form rendered="#{glinija.otkazaneLinije().size() > 0}">
+                    
+                    <h2>Otkazane linije</h2>
+                    
+                    <p:dataTable var="otkazana" value="#{glinija.otkazaneLinije()}">
+
+                        <p:column headerText="Broj linije">
+                            <h:outputText value="#{otkazana.brojLinije}" />
+                        </p:column>
+                        
+                        <p:column headerText="Polazno stajaliste">
+                            <h:outputText value="#{otkazana.polaznoStajaliste}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Krajnje stajaliste">
+                            <h:outputText value="#{otkazana.krajnjeStajaliste}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Otkazana do">
+                            <h:outputText value="#{otkazana.otkazanaDo}">
+                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    <p:separator/>
+                    
+                </h:form>
+
+                <h:form rendered="#{glinija.otkazaneLinije().size() > 0}">
+                    
+                     <h2>Aktivne linije</h2>
+                
+                </h:form>
+                
+              
+                
+                <p:dataTable var="linija" value="#{glinija.tabela}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+
+                    <p:column headerText="Broj linije">
+                        <h:outputText value="#{linija.brojLinije}" />
+                    </p:column>
+
+                    <p:column headerText="Polazno stajaliste">
+                        <h:outputText value="#{linija.polaznoStajaliste}" />
+                    </p:column>
+
+                    <p:column headerText="Krajnje stajaliste">
+                        <h:outputText value="#{linija.krajnjeStajaliste}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:commandLink value="detalji o liniji" action="#{glinija.detalji()}">
+                            <f:setPropertyActionListener target="#{glinija.odabranaLinija}" value="#{linija}"/>
+                        </h:commandLink>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+            <br/>
+
+            <p:separator/>
+
+            <h2>Pretraga linija</h2>
+
+            <p:message for="gpretraga" />
+
+            <h:form id="gpretraga">
+
+                <h:panelGrid columns="2" cellpadding="5">
+
+
+                    <p:outputLabel for="polaziste" value="Polazno stajaliste:" />
+                    <p:selectOneMenu id="polaziste" value="#{glinija.polaznoStajaliste}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="odrediste" value="Krajnje stajaliste:" />
+                    <p:selectOneMenu id="odrediste" value="#{glinija.krajnjeStajaliste}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{glinija.stajalista}" />
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>
+
+                <h:commandButton value="Trazi" action="#{glinija.pretraga()}"/>
+
+            </h:form>
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+</html>
+

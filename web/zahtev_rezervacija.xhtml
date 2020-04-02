@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <h2>Zahtevi za rezervaciju</h2>
+
+            <b><h:outputText value="Nema zahteva" rendered="#{zahtevRezervacijaPrikaz.zahtevi.size() == 0}"/></b>
+
+            <h:form rendered="#{zahtevRezervacijaPrikaz.zahtevi.size() > 0}">
+
+                <p:dataTable value="#{zahtevRezervacijaPrikaz.zahtevi}" var="zahtev">
+                    <p:column headerText="Korisnicko ime">
+                        <h:outputText value="#{zahtev.korisnickoIme}" />
+                    </p:column>
+
+                    <p:column headerText="Linija">
+                        <h:outputText value="#{zahtev.linija}"/>
+                    </p:column>
+
+                    <p:column headerText="Slobodna mesta">
+                        <h:outputText value="#{zahtev.slobodno}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+
+
+
+
+
+                <h:commandLink value="Proveri zahteve" action="#{zahtevRezervacijaPrikaz.proveriZahteveRez()}"/>
+
+            </h:form>
+
+            <h:form>
+
+                <br/>
+                <br/>
+
+                <h:outputText value="Odobreno: #{zahtevRezervacijaPrikaz.odobreno}"     rendered="#{zahtevRezervacijaPrikaz.odobreno != null}"/> 
+                <br/>
+                <br/>
+                <h:outputText value="Odbijeno: #{zahtevRezervacijaPrikaz.odbijeno}"     rendered="#{zahtevRezervacijaPrikaz.odbijeno != null}"/>         
+
+            </h:form>
+
+
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>
+

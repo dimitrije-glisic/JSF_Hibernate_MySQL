@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+
+            <h2>Dodavanje vozaca</h2>
+
+            <p:message for="dodavanje_vozac"/>
+            <h:form id="dodavanje_vozac">
+
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="ime" value="Ime:"/>
+                    <p:inputText id="ime" value="#{dodavanjeVozac.vozac.ime}" 
+                                 required="true"
+                                 requiredMessage="Sva polja su obavezna"/>
+
+                    <h:outputLabel for="prezime" value="Prezime"/>
+                    <p:inputText id="prezime" value="#{dodavanjeVozac.vozac.prezime}" required="true"
+                                 requiredMessage="Sva polja su obavezna"/>
+
+                    <h:outputLabel for="datumrodj" value="Datum rodjenja(format gggg-mm-dd):"/>
+                    <p:inputText id="datumrodj" value="#{dodavanjeVozac.vozac.datumRodjenja}" required="true"
+                                 requiredMessage="Sva polja su obavezna">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </p:inputText>
+
+                    <h:outputLabel for="datumzap" value="Datum zaposlenja(format gggg-mm-dd):"/>
+                    <p:inputText id="datumzap" value="#{dodavanjeVozac.vozac.datumZaposlenja}" required="true"
+                                 requiredMessage="Sva polja su obavezna">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </p:inputText>
+
+                </h:panelGrid>
+
+                <h:commandButton value="Dodaj vozaca" action="#{dodavanjeVozac.dodajVozaca()}"/>
+
+
+
+            </h:form>
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+
+</html>
+

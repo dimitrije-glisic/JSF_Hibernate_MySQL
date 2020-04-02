@@ -1,0 +1,13 @@
+<!--
+    <filter>
+        <filter-name>NoCacheFilter</filter-name>
+        <filter-class>com.dimi.servlet.NoCacheFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>NoCacheFilter</filter-name>
+        <url-pattern>/user/*</url-pattern>
+    </filter-mapping>
+    
+    -->
+    
